@@ -24,11 +24,13 @@
             </em></p>
             <p>{{ post.content }}</p>
             <div class="post-actions">
-                <a href="{{ url_for('like', post_id=post.id) }}" class="like-button">
-                    ❤️ Like ({{ post.likes|default(0) }})
-                </a>
+                <form action="{{ url_for('like', post_id=post.id) }}" method="POST" style="display: inline;">
+                    <button type="submit" class="like-button">❤️ Like ({{ post.likes|default(0) }})</button>
+                </form>
                 <a href="{{ url_for('update', post_id=post.id) }}" class="update-button">Update</a>
-                <a href="{{ url_for('delete', post_id=post.id) }}" class="delete-button">Delete</a>
+                <form action="{{ url_for('delete', post_id=post.id) }}" method="POST" style="display: inline;">
+                    <button type="submit" class="delete-button">Delete</button>
+                </form>
             </div>
         </div>
         {% endfor %}

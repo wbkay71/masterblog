@@ -113,41 +113,83 @@ h2 {
     font-size: 0.875rem;
 }
 
-/* Button styles */
+/* Button container */
 .post-actions {
     margin-top: 1.5rem;
     display: flex;
     gap: 1rem;
+    align-items: center;
 }
 
+/* Reset form styles inside post-actions */
+.post-actions form {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    animation: none !important;
+}
+
+/* Button styles - unified for links and buttons */
 .update-button,
-.delete-button {
+.delete-button,
+.like-button,
+button.update-button,
+button.delete-button,
+button.like-button {
     padding: 0.5rem 1rem;
     text-decoration: none;
     border-radius: 0.375rem;
     font-size: 0.875rem;
     font-weight: 500;
     transition: all 0.2s ease;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    min-width: 90px;
+    height: 36px;
+    line-height: 1;
+    text-align: center;
 }
 
-.update-button {
+/* Individual button colors */
+.update-button,
+button.update-button {
     background-color: var(--primary-color);
     color: white;
 }
 
-.update-button:hover {
+.update-button:hover,
+button.update-button:hover {
     background-color: #4f46e5;
     transform: translateY(-1px);
 }
 
-.delete-button {
+.delete-button,
+button.delete-button {
     background-color: var(--danger-color);
     color: white;
 }
 
-.delete-button:hover {
+.delete-button:hover,
+button.delete-button:hover {
     background-color: #dc2626;
+    transform: translateY(-1px);
+}
+
+.like-button,
+button.like-button {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.like-button:hover,
+button.like-button:hover {
+    background-color: #7c3aed;
     transform: translateY(-1px);
 }
 
@@ -196,8 +238,8 @@ textarea {
     min-height: 150px;
 }
 
-/* Submit button */
-button[type="submit"] {
+/* Submit button in forms */
+button[type="submit"]:not(.like-button):not(.delete-button):not(.update-button) {
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     color: white;
     padding: 0.75rem 2rem;
@@ -210,7 +252,7 @@ button[type="submit"] {
     margin-right: 1rem;
 }
 
-button[type="submit"]:hover {
+button[type="submit"]:not(.like-button):not(.delete-button):not(.update-button):hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
 }
@@ -241,7 +283,7 @@ form a:hover {
 }
 
 .post,
-form {
+form:not(.post-actions form) {
     animation: fadeIn 0.5s ease-out;
 }
 
@@ -250,21 +292,30 @@ form {
     h1 {
         font-size: 2rem;
     }
-    
+
     .container {
         padding: 1rem;
     }
-    
+
     .post {
         padding: 1.5rem;
     }
-    
+
     .post-actions {
         flex-direction: column;
+        width: 100%;
     }
-    
+
+    .post-actions form {
+        width: 100%;
+    }
+
     .update-button,
-    .delete-button {
+    .delete-button,
+    .like-button,
+    button.update-button,
+    button.delete-button,
+    button.like-button {
         width: 100%;
         text-align: center;
     }
@@ -279,22 +330,4 @@ form {
         --text-secondary: #64748b;
         --border-color: #e2e8f0;
     }
-}
-
-/* Like button style */
-.like-button {
-    padding: 0.5rem 1rem;
-    text-decoration: none;
-    border-radius: 0.375rem;
-    font-size: 0.875rem;
-    font-weight: 500;
-    transition: all 0.2s ease;
-    display: inline-block;
-    background-color: var(--secondary-color);
-    color: white;
-}
-
-.like-button:hover {
-    background-color: #7c3aed;
-    transform: translateY(-1px);
 }

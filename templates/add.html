@@ -9,7 +9,7 @@
 <body>
     <h1>Add New Blog Post</h1>
 
-    <form method="POST" action="/add">
+    <form method="POST" action="{{ url_for('add') }}">
         <div class="form-group">
             <label for="author">Author:</label>
             <input type="text" id="author" name="author" required>
