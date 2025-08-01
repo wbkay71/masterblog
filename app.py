@@ -61,7 +61,8 @@ def add():
             'author': request.form.get('author'),
             'title': request.form.get('title'),
             'content': request.form.get('content'),
-            'created_at': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            'created_at': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+            'likes': 0  # NEU!
         }
 
         # Add new post to list
@@ -120,6 +121,24 @@ def update(post_id):
     # Else, it's a GET request
     # So display the update.html page
     return render_template('update.html', post=post)
+
+
+@app.route('/like/<int:post_id>')
+def like(post_id):
+    # Load posts
+    blog_posts = load_blog_posts()
+
+    # Find the post and increment likes
+    for post in blog_posts:
+        if post['id'] == post_id:
+            post['likes'] = post.get('likes', 0) + 1
+            break
+
+    # Save updated posts
+    save_blog_posts(blog_posts)
+
+    # Redirect back to home page
+    return redirect(url_for('index'))
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5001, debug=True)

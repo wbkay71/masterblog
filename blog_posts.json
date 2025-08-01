@@ -4,6 +4,23 @@
         "author": "Wanja",
         "title": "Test the Test",
         "content": "Test",
-        "created_at": "2025-08-01 13:42:53"
+        "created_at": "2025-08-01 13:42:53",
+        "likes": 1
+    },
+    {
+        "id": 2,
+        "author": "Test1",
+        "title": "Gucci",
+        "content": "Prada",
+        "created_at": "2025-08-01 14:12:07",
+        "likes": 0
+    },
+    {
+        "id": 3,
+        "author": "CoderJoe",
+        "title": "Python rules the shit out of me",
+        "content": "I_luv-PyTh0n!\r\nI_luv-PyTh0n!I_luv-PyTh0n!\r\nI_luv-PyTh0n!I_luv-PyTh0n!I_luv-PyTh0n!\r\nI_luv-PyTh0n!I_luv-PyTh0n!I_luv-PyTh0n!I_luv-PyTh0n!\r\nI_luv-PyTh0n!I_luv-PyTh0n!I_luv-PyTh0n!I_luv-PyTh0n!I_luv-PyTh0n!\r\nI_luv-PyTh0n!I_luv-PyTh0n!I_luv-PyTh0n!I_luv-PyTh0n!I_luv-PyTh0n!I_luv-PyTh0n!",
+        "created_at": "2025-08-01 14:13:11",
+        "likes": 3
     }
 ]

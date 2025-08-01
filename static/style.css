@@ -280,3 +280,21 @@ form {
         --border-color: #e2e8f0;
     }
 }
+
+/* Like button style */
+.like-button {
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    display: inline-block;
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.like-button:hover {
+    background-color: #7c3aed;
+    transform: translateY(-1px);
+}

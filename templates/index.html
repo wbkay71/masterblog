@@ -24,6 +24,9 @@
             </em></p>
             <p>{{ post.content }}</p>
             <div class="post-actions">
+                <a href="{{ url_for('like', post_id=post.id) }}" class="like-button">
+                    ❤️ Like ({{ post.likes|default(0) }})
+                </a>
                 <a href="{{ url_for('update', post_id=post.id) }}" class="update-button">Update</a>
                 <a href="{{ url_for('delete', post_id=post.id) }}" class="delete-button">Delete</a>
             </div>
