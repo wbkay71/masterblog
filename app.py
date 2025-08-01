@@ -1,7 +1,17 @@
 from flask import Flask, render_template, request, redirect, url_for
 import json
+from datetime import datetime
 
 app = Flask(__name__)
+
+
+@app.template_filter('dateformat')
+def dateformat(date_string):
+    """Convert date string to readable format"""
+    if date_string:
+        date_obj = datetime.strptime(date_string, '%Y-%m-%d %H:%M:%S')
+        return date_obj.strftime('%B %d, %Y at %I:%M %p')
+    return ''
 
 
 def load_blog_posts():
@@ -16,6 +26,13 @@ def save_blog_posts(posts):
     with open('blog_posts.json', 'w') as file:
         json.dump(posts, file, indent=4)
 
+def fetch_post_by_id(post_id):
+    """Find and return a post by its ID"""
+    blog_posts = load_blog_posts()
+    for post in blog_posts:
+        if post['id'] == post_id:
+            return post
+    return None
 
 @app.route('/')
 def index():
@@ -43,7 +60,8 @@ def add():
             'id': new_id,
             'author': request.form.get('author'),
             'title': request.form.get('title'),
-            'content': request.form.get('content')
+            'content': request.form.get('content'),
+            'created_at': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         }
 
         # Add new post to list
@@ -72,6 +90,36 @@ def delete(post_id):
     # Redirect back to home page
     return redirect(url_for('index'))
 
+
+@app.route('/update/<int:post_id>', methods=['GET', 'POST'])
+def update(post_id):
+    # Fetch the blog posts from the JSON file
+    post = fetch_post_by_id(post_id)
+    if post is None:
+        # Post not found
+        return "Post not found", 404
+
+    if request.method == 'POST':
+        # Load all posts
+        blog_posts = load_blog_posts()
+
+        # Find and update the post
+        for p in blog_posts:
+            if p['id'] == post_id:
+                p['author'] = request.form.get('author')
+                p['title'] = request.form.get('title')
+                p['content'] = request.form.get('content')
+                break
+
+        # Save updated posts
+        save_blog_posts(blog_posts)
+
+        # Redirect back to index
+        return redirect(url_for('index'))
+
+    # Else, it's a GET request
+    # So display the update.html page
+    return render_template('update.html', post=post)
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5001, debug=True)

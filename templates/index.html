@@ -7,18 +7,28 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Welcome to My Flask Blog!</h1>
+    <div class="container">
+        <h1>My Flask Blog</h1>
 
-    <a href="{{ url_for('add') }}" class="add-post-link">Add New Post</a>
+        <div class="nav-area">
+            <a href="{{ url_for('add') }}" class="add-post-link">✨ Add New Post</a>
+        </div>
 
-    {% for post in posts %}
-    <div class="post">
-        <h2>{{ post.title }}</h2>
-        <p><em>Written by {{ post.author }}</em></p>
-        <p>{{ post.content }}</p>
-        <a href="{{ url_for('delete', post_id=post.id) }}" class="delete-button">Delete</a>
+        {% for post in posts %}
+        <div class="post">
+            <h2>{{ post.title }}</h2>
+            <p><em>Written by {{ post.author }}
+                {% if post.created_at %}
+                on {{ post.created_at|dateformat }}
+                {% endif %}
+            </em></p>
+            <p>{{ post.content }}</p>
+            <div class="post-actions">
+                <a href="{{ url_for('update', post_id=post.id) }}" class="update-button">Update</a>
+                <a href="{{ url_for('delete', post_id=post.id) }}" class="delete-button">Delete</a>
+            </div>
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-
 </body>
 </html>
